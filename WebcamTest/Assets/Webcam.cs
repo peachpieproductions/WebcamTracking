@@ -44,7 +44,10 @@ public class Webcam : MonoBehaviour
         Vector3 towardObjectFromHead = (testObj.position + Vector3.back * 20) - bullNeckBone.position;
         towardObjectFromHead.x *= -1;
         towardObjectFromHead *= .5f;
-        bullNeckBone.rotation = Quaternion.Lerp(bullNeckBone.rotation, Quaternion.LookRotation(towardObjectFromHead, transform.up), Time.deltaTime * 4f);
+        var dot = Vector3.Dot(bullNeckBone.forward, towardObjectFromHead.normalized);
+        float lerpSpeed = 1.5f;
+        if (dot < .99f) lerpSpeed = 4f;
+        bullNeckBone.rotation = Quaternion.Lerp(bullNeckBone.rotation, Quaternion.LookRotation(towardObjectFromHead, transform.up), Time.deltaTime * lerpSpeed);
         //bullNeckBone.rotation = Quaternion.LookRotation(towardObjectFromHead, transform.up);
 
 
