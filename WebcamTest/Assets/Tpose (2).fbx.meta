@@ -3,7 +3,37 @@ guid: 54dd6cac37852bf4e87b5d64cfd6ed37
 ModelImporter:
   serializedVersion: 25
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Body_Lambert
+    second: {fileID: 2100000, guid: bc77de5dc82fb2c48a1294fe4ff0c2cd, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Eyes_Lambert
+    second: {fileID: 2100000, guid: af1896c1a3f2a7d4e8d007d4d11b2b99, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Horns_Lambert
+    second: {fileID: 2100000, guid: df82974ca8d09a949856909be53c25b5, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Tail_Lambert
+    second: {fileID: 2100000, guid: 35ebb58dc9381d44eb61312fc4c7f9d8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Teeth_Bottom_Lambert
+    second: {fileID: 2100000, guid: f5f338c150b784c49a21b27ada351a1f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Teeth_Top_Lambert
+    second: {fileID: 2100000, guid: b8a9aa2696219b543b288c1be6c6cff7, type: 2}
   materials:
     importMaterials: 1
     materialName: 0

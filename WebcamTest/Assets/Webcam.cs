@@ -13,6 +13,8 @@ public class Webcam : MonoBehaviour
     public Transform bullNeckBone;
     public Vector2 averageCoords;
     public Transform testObj;
+    public Material renderMat;
+    public Transform renderPlane;
 
     WebCamTexture webcamTex;
     Color32[] previousFrame;
@@ -22,7 +24,9 @@ public class Webcam : MonoBehaviour
     private void Start() {
         webcamTex = new WebCamTexture();
         webcamTex.Play();
+        renderPlane.Rotate(new Vector3 (webcamTex.videoRotationAngle,0,0));
         rawImage.texture = webcamTex;
+        renderMat.mainTexture = webcamTex;
 
         //List all devices
         foreach(WebCamDevice d in WebCamTexture.devices) {
@@ -43,40 +47,13 @@ public class Webcam : MonoBehaviour
 
         Vector3 towardObjectFromHead = (testObj.position + Vector3.back * 20) - bullNeckBone.position;
         towardObjectFromHead.x *= -1;
-        towardObjectFromHead *= .5f;
+        towardObjectFromHead *= .75f;
+        towardObjectFromHead.y *= 3f;
         var dot = Vector3.Dot(bullNeckBone.forward, towardObjectFromHead.normalized);
         float lerpSpeed = 1.5f;
         if (dot < .99f) lerpSpeed = 4f;
         bullNeckBone.rotation = Quaternion.Lerp(bullNeckBone.rotation, Quaternion.LookRotation(towardObjectFromHead, transform.up), Time.deltaTime * lerpSpeed);
-        //bullNeckBone.rotation = Quaternion.LookRotation(towardObjectFromHead, transform.up);
-
-
-        // Store the current head rotation since we will be resetting it
-        /*Quaternion currentLocalRotation = headBone.localRotation;
-        // Reset the head rotation so our world to local space transformation will use the head's zero rotation. 
-        // Note: Quaternion.Identity is the quaternion equivalent of "zero"
-        headBone.localRotation = Quaternion.identity;
-
-        Vector3 targetWorldLookDir = target.position - headBone.position;
-        Vector3 targetLocalLookDir = headBone.InverseTransformDirection(targetWorldLookDir);
-
-        // Apply angle limit
-        targetLocalLookDir = Vector3.RotateTowards(
-            Vector3.forward,
-            targetLocalLookDir,
-            Mathf.Deg2Rad * headMaxTurnAngle, // Note we multiply by Mathf.Deg2Rad here to convert degrees to radians
-            0 // We don't care about the length here, so we leave it at zero
-        );
-
-        // Get the local rotation by using LookRotation on a local directional vector
-        Quaternion targetLocalRotation = Quaternion.LookRotation(targetLocalLookDir, Vector3.up);
-
-        // Apply smoothing
-        headBone.localRotation = Quaternion.Slerp(
-            currentLocalRotation,
-            targetLocalRotation,
-            1 - Mathf.Exp(-headTrackingSpeed * Time.deltaTime)
-        );*/
+        
     }
 
     public IEnumerator CompareImageData() {
