@@ -96,11 +96,13 @@ public class Webcam : MonoBehaviour
 
             averageCoords = coordinateSum / changedPixelsList.Count;
 
-            testObj.localPosition = Vector3.Lerp(testObj.localPosition, new Vector3 ((averageCoords.x / webcamTex.width) * spaceExtents.x, (averageCoords.y / webcamTex.height) * spaceExtents.y, 0), Time.deltaTime * 50f);
+            if (!float.IsNaN(averageCoords.x)) {
+                testObj.localPosition = Vector3.Lerp(testObj.localPosition, new Vector3((averageCoords.x / webcamTex.width) * spaceExtents.x, (averageCoords.y / webcamTex.height) * spaceExtents.y, 0), Time.deltaTime * 50f);
 
-            hue = (hue + Time.deltaTime * 1f) % 1f;
+                hue = (hue + Time.deltaTime * 1f) % 1f;
 
-            previousFrame = currentFrame;
+                previousFrame = currentFrame;
+            }
 
             yield return new WaitForSeconds(.1f);
 
