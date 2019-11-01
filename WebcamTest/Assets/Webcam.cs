@@ -100,7 +100,7 @@ public class Webcam : MonoBehaviour
                 int from2 = webcamTex.width;
                 int to2 = 0;
                 //yCoord = (yCoord - from1) / (to1 - from1) * (to2 - from2) + from2;
-                Vector2 coords = new Vector2(xCoord, -yCoord + webcamTex.height);
+                Vector2 coords = new Vector2(xCoord, yCoord);
                 coordinateSum += coords;
                 //if (j > 100 && j < 110) Debug.Log(pixelId + ", " + xCoord + ", " + yCoord);
                 if (Random.value < .02f) {
@@ -115,13 +115,14 @@ public class Webcam : MonoBehaviour
 
             averageCoords = coordinateSum / changedPixelsList.Count;
 
-            /*if (!float.IsNaN(averageCoords.x)) {
-                testObj.localPosition = Vector3.Lerp(testObj.localPosition, new Vector3((averageCoords.x / webcamTex.width) * spaceExtents.x, (averageCoords.y / webcamTex.height) * spaceExtents.y, 0), Time.deltaTime * 50f);
+            if (!float.IsNaN(averageCoords.x)) {
+                //testObj.localPosition = Vector3.Lerp(testObj.localPosition, new Vector3((averageCoords.x / webcamTex.width) * spaceExtents.x, (averageCoords.y / webcamTex.height) * spaceExtents.y, 0), Time.deltaTime * 50f);
 
                 hue = (hue + Time.deltaTime * 1f) % 1f;
+                
+            }
 
-                previousFrame = currentFrame;
-            }*/
+            previousFrame = currentFrame;
 
             yield return new WaitForSeconds(.1f);
 
