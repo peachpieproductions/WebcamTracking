@@ -56,7 +56,7 @@ public class Webcam : MonoBehaviour
         StartCoroutine(CompareImageData());
     }
 
-    /*private void Update() {
+    private void Update() {
         
         Vector3 towardObjectFromHead = (testObj.position + Vector3.back * 20) - bullNeckBone.position;
         towardObjectFromHead.x *= -1;
@@ -67,7 +67,7 @@ public class Webcam : MonoBehaviour
         if (dot < .99f) lerpSpeed = 4f;
         bullNeckBone.rotation = Quaternion.Lerp(bullNeckBone.rotation, Quaternion.LookRotation(towardObjectFromHead, transform.up), Time.deltaTime * lerpSpeed);
         
-    }*/
+    }
 
     public IEnumerator CompareImageData() {
 

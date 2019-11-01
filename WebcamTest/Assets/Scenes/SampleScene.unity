@@ -154,7 +154,7 @@ MonoBehaviour:
   particleSys: {fileID: 303165974}
   bullNeckBone: {fileID: 1891312985}
   averageCoords: {x: 0, y: 0}
-  testObj: {fileID: 0}
+  testObj: {fileID: 1739744431}
   renderMat: {fileID: 2100000, guid: 52a5e297b5e4fef4590d485a9fe71a52, type: 2}
   renderPlane: {fileID: 1764437090}
 --- !u!4 &234441827
@@ -5540,8 +5540,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1764437086}
   m_LocalRotation: {x: 0.7071068, y: -0.00001411885, z: 0.00001411885, w: -0.7071068}
-  m_LocalPosition: {x: 0.013764, y: 1.018, z: -0.20181}
-  m_LocalScale: {x: 1.5578223, y: 0.877597, z: 1.1493564}
+  m_LocalPosition: {x: -0.068867, y: 1.018, z: -0.20181}
+  m_LocalScale: {x: 2.0178032, y: 0.877597, z: 1.1493564}
   m_Children:
   - {fileID: 713360903}
   m_Father: {fileID: 0}
@@ -5804,7 +5804,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!64 &2134253480
 MeshCollider:
   m_ObjectHideFlags: 0
