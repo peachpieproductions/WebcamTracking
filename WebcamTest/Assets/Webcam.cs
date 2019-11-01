@@ -7,6 +7,9 @@ public class Webcam : MonoBehaviour
 {
 
 
+    public bool windowsMode;
+
+    [Header("References")]
     public RawImage rawImage;
     public Vector2 spaceExtents;
     public ParticleSystem particleSys;
@@ -37,7 +40,7 @@ public class Webcam : MonoBehaviour
         }
         webcamTex = new WebCamTexture(frontCamName, 2048, 1536, 60);
         webcamTex.Play();
-        //renderPlane.Rotate(new Vector3 (0,0,0));
+        if (windowsMode) renderPlane.Rotate(new Vector3 (0,0,180), Space.World);
         rawImage.texture = webcamTex;
         renderMat.mainTexture = webcamTex;
 
@@ -59,7 +62,7 @@ public class Webcam : MonoBehaviour
     private void Update() {
         
         Vector3 towardObjectFromHead = (testObj.position + Vector3.back * 20) - bullNeckBone.position;
-        //towardObjectFromHead.x *= -1;
+        if (windowsMode) towardObjectFromHead.x *= -1;
         towardObjectFromHead *= .75f;
         towardObjectFromHead.y *= 3f;   
         var dot = Vector3.Dot(bullNeckBone.forward, towardObjectFromHead.normalized);
@@ -95,11 +98,7 @@ public class Webcam : MonoBehaviour
                 j++;
                 int yCoord = Mathf.FloorToInt(pixelId / webcamTex.width);
                 int xCoord = Mathf.FloorToInt(pixelId - yCoord * webcamTex.width);
-                int from1 = 0;
-                int to1 = webcamTex.width;
-                int from2 = webcamTex.width;
-                int to2 = 0;
-                //yCoord = (yCoord - from1) / (to1 - from1) * (to2 - from2) + from2;
+
                 Vector2 coords = new Vector2(xCoord, yCoord);
                 coordinateSum += coords;
                 //if (j > 100 && j < 110) Debug.Log(pixelId + ", " + xCoord + ", " + yCoord);
@@ -116,7 +115,7 @@ public class Webcam : MonoBehaviour
             averageCoords = coordinateSum / changedPixelsList.Count;
 
             if (!float.IsNaN(averageCoords.x)) {
-                testObj.localPosition = Vector3.Lerp(testObj.localPosition, new Vector3((averageCoords.x / webcamTex.width) * spaceExtents.x, (averageCoords.y / webcamTex.height) * spaceExtents.y, 0), Time.deltaTime * 25f);
+                testObj.localPosition = Vector3.Lerp(testObj.localPosition, new Vector3((averageCoords.x / webcamTex.width) * spaceExtents.x, (averageCoords.y / webcamTex.height) * spaceExtents.y, 0), Time.deltaTime * 35f);
 
                 hue = (hue + Time.deltaTime * 1f) % 1f;
                 
