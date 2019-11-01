@@ -21,43 +21,59 @@ public class Webcam : MonoBehaviour
     List<int> changedPixelsList = new List<int>();
     float hue;
 
+    private void Awake()
+    {
+        Application.RequestUserAuthorization(UserAuthorization.WebCam); 
+
+    }
+
     private void Start() {
-        webcamTex = new WebCamTexture();
+
+        string frontCamName = "";
+        foreach (WebCamDevice d in WebCamTexture.devices)
+        {
+            if (d.isFrontFacing)
+            {
+                frontCamName = d.name;
+            }
+        }
+        webcamTex = new WebCamTexture(frontCamName, 2048, 1536, 60);
         webcamTex.Play();
-        renderPlane.Rotate(new Vector3 (webcamTex.videoRotationAngle,0,0));
+        //renderPlane.Rotate(new Vector3 (0,0,0));
         rawImage.texture = webcamTex;
         renderMat.mainTexture = webcamTex;
 
         //List all devices
-        foreach(WebCamDevice d in WebCamTexture.devices) {
-            Debug.Log(d.name);
-        }
+        //foreach(WebCamDevice d in WebCamTexture.devices) {
+            //Debug.Log(d.name);
+        //}
 
         //List chosen device
-        Debug.Log(webcamTex.deviceName);
+        //Debug.Log(webcamTex.deviceName);
 
-        var pixels = webcamTex.GetPixels32();
-        Debug.Log(pixels.Length);
-        Debug.Log(webcamTex.width + " x " + webcamTex.height);
+        //var pixels = webcamTex.GetPixels32();
+        //Debug.Log(pixels.Length);
+        //Debug.Log(webcamTex.width + " x " + webcamTex.height);
 
         StartCoroutine(CompareImageData());
     }
 
-    private void Update() {
-
+    /*private void Update() {
+        
         Vector3 towardObjectFromHead = (testObj.position + Vector3.back * 20) - bullNeckBone.position;
         towardObjectFromHead.x *= -1;
         towardObjectFromHead *= .75f;
-        towardObjectFromHead.y *= 3f;
+        towardObjectFromHead.y *= 3f;   
         var dot = Vector3.Dot(bullNeckBone.forward, towardObjectFromHead.normalized);
         float lerpSpeed = 1.5f;
         if (dot < .99f) lerpSpeed = 4f;
         bullNeckBone.rotation = Quaternion.Lerp(bullNeckBone.rotation, Quaternion.LookRotation(towardObjectFromHead, transform.up), Time.deltaTime * lerpSpeed);
         
-    }
+    }*/
 
     public IEnumerator CompareImageData() {
 
+        yield return new WaitForSeconds(.5f);
         previousFrame = webcamTex.GetPixels32();
         yield return null;
 
@@ -81,6 +97,11 @@ public class Webcam : MonoBehaviour
                 j++;
                 int yCoord = Mathf.FloorToInt(pixelId / webcamTex.width);
                 int xCoord = Mathf.FloorToInt(pixelId - yCoord * webcamTex.width);
+                int from1 = 0;
+                int to1 = webcamTex.width;
+                int from2 = webcamTex.width;
+                int to2 = 0;
+                yCoord = (yCoord - from1) / (to1 - from1) * (to2 - from2) + from2;
                 Vector2 coords = new Vector2(xCoord, yCoord);
                 coordinateSum += coords;
                 //if (j > 100 && j < 110) Debug.Log(pixelId + ", " + xCoord + ", " + yCoord);
@@ -96,13 +117,13 @@ public class Webcam : MonoBehaviour
 
             averageCoords = coordinateSum / changedPixelsList.Count;
 
-            if (!float.IsNaN(averageCoords.x)) {
+            /*if (!float.IsNaN(averageCoords.x)) {
                 testObj.localPosition = Vector3.Lerp(testObj.localPosition, new Vector3((averageCoords.x / webcamTex.width) * spaceExtents.x, (averageCoords.y / webcamTex.height) * spaceExtents.y, 0), Time.deltaTime * 50f);
 
                 hue = (hue + Time.deltaTime * 1f) % 1f;
 
                 previousFrame = currentFrame;
-            }
+            }*/
 
             yield return new WaitForSeconds(.1f);
 
