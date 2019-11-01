@@ -42,7 +42,10 @@ public class Webcam : MonoBehaviour
         webcamTex = new WebCamTexture(frontCamName, 2048, 1536, 60);
         webcamTex.Play();
         if (windowsMode) renderPlane.Rotate(new Vector3(0, 0, 180), Space.World);
-        else particleRoot.Rotate(new Vector3(0,0,180), Space.World);
+        else { 
+            //particleRoot.Rotate(new Vector3(0, 0, 180), Space.World);
+            particleRoot.localScale = new Vector3(particleRoot.localScale.x * -1, particleRoot.localScale.y, particleRoot.localScale.z);
+        }
         rawImage.texture = webcamTex;
         renderMat.mainTexture = webcamTex;
 
