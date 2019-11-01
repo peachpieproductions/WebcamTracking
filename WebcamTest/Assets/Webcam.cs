@@ -41,10 +41,12 @@ public class Webcam : MonoBehaviour
         }
         webcamTex = new WebCamTexture(frontCamName, 2048, 1536, 60);
         webcamTex.Play();
-        if (windowsMode) renderPlane.Rotate(new Vector3(0, 0, 180), Space.World);
-        else { 
+        if (windowsMode) {
+            renderPlane.Rotate(new Vector3(0, 0, 180), Space.World);
+            renderPlane.localScale = new Vector3(-renderPlane.localScale.x, renderPlane.localScale.y, renderPlane.localScale.z);
+        } else {
             //particleRoot.Rotate(new Vector3(0, 0, 180), Space.World);
-            particleRoot.localScale = new Vector3(particleRoot.localScale.x * -1, particleRoot.localScale.y, particleRoot.localScale.z);
+            //particleRoot.localScale = new Vector3(particleRoot.localScale.x * -1, particleRoot.localScale.y, particleRoot.localScale.z);
         }
         rawImage.texture = webcamTex;
         renderMat.mainTexture = webcamTex;
@@ -67,7 +69,7 @@ public class Webcam : MonoBehaviour
     private void Update() {
         
         Vector3 towardObjectFromHead = (testObj.position + Vector3.back * 20) - bullNeckBone.position;
-        if (windowsMode) towardObjectFromHead.x *= -1;
+        //if (windowsMode) towardObjectFromHead.x *= -1;
         towardObjectFromHead *= .75f;
         towardObjectFromHead.y *= 3f;   
         var dot = Vector3.Dot(bullNeckBone.forward, towardObjectFromHead.normalized);
