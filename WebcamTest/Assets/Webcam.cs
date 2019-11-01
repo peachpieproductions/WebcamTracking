@@ -27,8 +27,9 @@ public class Webcam : MonoBehaviour
 
     private void Awake()
     {
-        Application.RequestUserAuthorization(UserAuthorization.WebCam); 
-
+        if (Application.platform == RuntimePlatform.IPhonePlayer) windowsMode = false;
+        else windowsMode = true;
+        Application.RequestUserAuthorization(UserAuthorization.WebCam);
     }
 
     private void Start() {
