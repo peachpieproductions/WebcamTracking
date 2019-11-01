@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657868, g: 0.49641263, b: 0.5748171, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -158,6 +158,7 @@ MonoBehaviour:
   testObj: {fileID: 1739744431}
   renderMat: {fileID: 2100000, guid: 52a5e297b5e4fef4590d485a9fe71a52, type: 2}
   renderPlane: {fileID: 1764437090}
+  particleRoot: {fileID: 1996272040}
 --- !u!4 &234441827
 Transform:
   m_ObjectHideFlags: 0
@@ -5140,15 +5141,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 713360902}
-  m_LocalRotation: {x: -0.00000038743013, y: -0.00000018993521, z: -0.000020746511,
-    w: 1}
-  m_LocalPosition: {x: -9.909646, y: -4.66, z: -1.03}
-  m_LocalScale: {x: 1.5897517, y: 1.6074132, z: 1.2273494}
+  m_LocalRotation: {x: 0.7071068, y: 0.00000040939722, z: 0.00000042553128, w: 0.70710677}
+  m_LocalPosition: {x: -4.87686, y: 0.9436903, z: -4.940511}
+  m_LocalScale: {x: 0.7878626, y: 1.3985333, z: 1.398534}
   m_Children:
   - {fileID: 1739744431}
   - {fileID: 303165972}
-  m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_Father: {fileID: 1996272040}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!135 &713360904
 SphereCollider:
@@ -5714,6 +5714,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1996272039
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1996272040}
+  m_Layer: 0
+  m_Name: Particles
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1996272040
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1996272039}
+  m_LocalRotation: {x: -0.7071071, y: 0.000014126299, z: -0.0000152298335, w: 0.7071065}
+  m_LocalPosition: {x: -0.068867, y: 1.018, z: -0.20181}
+  m_LocalScale: {x: 2.0178032, y: 0.877597, z: 1.1493564}
+  m_Children:
+  - {fileID: 713360903}
+  m_Father: {fileID: 0}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2094734384
 GameObject:

@@ -18,6 +18,7 @@ public class Webcam : MonoBehaviour
     public Transform testObj;
     public Material renderMat;
     public Transform renderPlane;
+    public Transform particleRoot;
 
     WebCamTexture webcamTex;
     Color32[] previousFrame;
@@ -40,7 +41,8 @@ public class Webcam : MonoBehaviour
         }
         webcamTex = new WebCamTexture(frontCamName, 2048, 1536, 60);
         webcamTex.Play();
-        if (windowsMode) renderPlane.Rotate(new Vector3 (0,0,180), Space.World);
+        if (windowsMode) renderPlane.Rotate(new Vector3(0, 0, 180), Space.World);
+        else particleRoot.Rotate(new Vector3(0,0,180), Space.World);
         rawImage.texture = webcamTex;
         renderMat.mainTexture = webcamTex;
 
