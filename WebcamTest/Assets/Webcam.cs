@@ -30,10 +30,8 @@ public class Webcam : MonoBehaviour
     private void Start() {
 
         string frontCamName = "";
-        foreach (WebCamDevice d in WebCamTexture.devices)
-        {
-            if (d.isFrontFacing)
-            {
+        foreach (WebCamDevice d in WebCamTexture.devices) {
+            if (d.isFrontFacing) {
                 frontCamName = d.name;
             }
         }
@@ -101,8 +99,8 @@ public class Webcam : MonoBehaviour
                 int to1 = webcamTex.width;
                 int from2 = webcamTex.width;
                 int to2 = 0;
-                yCoord = (yCoord - from1) / (to1 - from1) * (to2 - from2) + from2;
-                Vector2 coords = new Vector2(xCoord, yCoord);
+                //yCoord = (yCoord - from1) / (to1 - from1) * (to2 - from2) + from2;
+                Vector2 coords = new Vector2(xCoord, -yCoord + webcamTex.height);
                 coordinateSum += coords;
                 //if (j > 100 && j < 110) Debug.Log(pixelId + ", " + xCoord + ", " + yCoord);
                 if (Random.value < .02f) {
