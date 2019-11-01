@@ -59,7 +59,7 @@ public class Webcam : MonoBehaviour
     private void Update() {
         
         Vector3 towardObjectFromHead = (testObj.position + Vector3.back * 20) - bullNeckBone.position;
-        towardObjectFromHead.x *= -1;
+        //towardObjectFromHead.x *= -1;
         towardObjectFromHead *= .75f;
         towardObjectFromHead.y *= 3f;   
         var dot = Vector3.Dot(bullNeckBone.forward, towardObjectFromHead.normalized);
@@ -116,7 +116,7 @@ public class Webcam : MonoBehaviour
             averageCoords = coordinateSum / changedPixelsList.Count;
 
             if (!float.IsNaN(averageCoords.x)) {
-                testObj.localPosition = Vector3.Lerp(testObj.localPosition, new Vector3((averageCoords.x / webcamTex.width) * spaceExtents.x, (averageCoords.y / webcamTex.height) * spaceExtents.y, 0), Time.deltaTime * 50f);
+                testObj.localPosition = Vector3.Lerp(testObj.localPosition, new Vector3((averageCoords.x / webcamTex.width) * spaceExtents.x, (averageCoords.y / webcamTex.height) * spaceExtents.y, 0), Time.deltaTime * 25f);
 
                 hue = (hue + Time.deltaTime * 1f) % 1f;
                 
